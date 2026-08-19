@@ -1,0 +1,4 @@
+﻿P_min_pct,S_min_pct,k_star,n_optimal_subsets,n_options_per_sensor_min,n_options_per_sensor_max,note
+90,80,10,16,4,6,multiple optima
+95,85,12,1,4,6,unique optimum
+98,90,16,13,2,5,multiple optima

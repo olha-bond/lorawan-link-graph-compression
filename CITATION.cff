@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata in this file."
+type: software
+title: "Threshold-Aware Link-Graph Compression with Per-Sensor Coverage Guarantees and Temporal Robustness in Urban LoRaWAN Networks"
+version: 0.3.1
+license: MIT
+repository-code: "https://github.com/olha-bond/lorawan-link-graph-compression"
+authors:
+  - family-names: Bondarenko
+    given-names: Olha
+    orcid: "https://orcid.org/0000-0003-0024-8789"
+    affiliation: "Taras Shevchenko National University of Kyiv"
+keywords:
+  - LoRaWAN
+  - link-graph compression
+  - per-sensor coverage
+  - dynamic programming
+  - fairness-aware selection
+  - temporal robustness

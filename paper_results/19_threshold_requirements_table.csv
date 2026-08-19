@@ -1,0 +1,4 @@
+﻿requirement,top_k_reliability_min_links,top_k_rssi_snr_min_links,fairness_greedy_min_links,dp_optimum_min_links
+">= 90% packet, >= 80% worst-sensor",12,13,10,10
+">= 95% packet, >= 85% worst-sensor",14,15,12,12
+">= 98% packet, >= 90% worst-sensor",18,19,16,16

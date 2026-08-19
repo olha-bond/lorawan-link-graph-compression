@@ -1,0 +1,102 @@
+{
+  "dataset": {
+    "doi": "10.18130/V3/RFTICK",
+    "expected_relative_path": "dataset/lorawan_metadata/lorawan_combined_dataset.parquet",
+    "name": "UVA long-term LoRaWAN communication metadata",
+    "source_file": "lorawan_combined_dataset.parquet",
+    "source_size_bytes": 21895656
+  },
+  "dimensions": {
+    "gateways": [
+      "gatewayA",
+      "gatewayB",
+      "gatewayC"
+    ],
+    "n_gateways": 3,
+    "n_observed_links": 30,
+    "n_reception_rows": 2091512,
+    "n_sensors": 10,
+    "n_unique_packets_by_sensor_counter": 1232813,
+    "observed_links": [
+      "sensor01→gatewayA",
+      "sensor01→gatewayB",
+      "sensor01→gatewayC",
+      "sensor02→gatewayA",
+      "sensor02→gatewayB",
+      "sensor02→gatewayC",
+      "sensor03→gatewayA",
+      "sensor03→gatewayB",
+      "sensor03→gatewayC",
+      "sensor04→gatewayA",
+      "sensor04→gatewayB",
+      "sensor04→gatewayC",
+      "sensor05→gatewayA",
+      "sensor05→gatewayB",
+      "sensor05→gatewayC",
+      "sensor06→gatewayA",
+      "sensor06→gatewayB",
+      "sensor06→gatewayC",
+      "sensor07→gatewayA",
+      "sensor07→gatewayB",
+      "sensor07→gatewayC",
+      "sensor08→gatewayA",
+      "sensor08→gatewayB",
+      "sensor08→gatewayC",
+      "sensor09→gatewayA",
+      "sensor09→gatewayB",
+      "sensor09→gatewayC",
+      "sensor10→gatewayA",
+      "sensor10→gatewayB",
+      "sensor10→gatewayC"
+    ],
+    "sensors": [
+      "sensor01",
+      "sensor02",
+      "sensor03",
+      "sensor04",
+      "sensor05",
+      "sensor06",
+      "sensor07",
+      "sensor08",
+      "sensor09",
+      "sensor10"
+    ]
+  },
+  "packet_identity": {
+    "columns": [
+      "sensor",
+      "counter"
+    ],
+    "max_pair_timestamp_span_seconds": 0.0,
+    "n_pairs_spanning_multiple_months": 0,
+    "n_pairs_with_span_above_threshold": 0,
+    "same_month_counter_reuse_not_excluded": true,
+    "suspicious_timestamp_span_seconds": 60.0
+  },
+  "time_handling": {
+    "calendar_month_timezone": "UTC",
+    "first_timestamp_utc": "2024-02-09T00:01:15.730000+00:00",
+    "last_timestamp_utc": "2025-06-11T23:59:56.064000+00:00",
+    "months": [
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06"
+    ],
+    "n_calendar_months": 17,
+    "timestamp_timezone": "UTC"
+  }
+}

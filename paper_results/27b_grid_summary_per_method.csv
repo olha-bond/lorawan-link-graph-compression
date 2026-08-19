@@ -1,0 +1,4 @@
+﻿method,n_evaluated_pairs,n_infeasible_pairs,optimal_cardinality_pct,optimal_cardinality_pct_given_evaluated,mean_gap,median_gap,max_gap
+Multi-cover greedy,1000,0,100.0,100.0,0.0,0.0,0
+Proposed fairness greedy (lambda=1),1000,0,100.0,100.0,0.0,0.0,0
+Coverage-only greedy (lambda=0),1000,0,4.0,4.0,5.837,7.0,8
