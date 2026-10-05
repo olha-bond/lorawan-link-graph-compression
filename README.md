@@ -16,6 +16,9 @@ Reproducibility repository for the manuscript of the same title. The code select
 - Temporal comparison of equal-cardinality subsets
 - Retrospective monthly, robust all-month, and rolling prospective evaluations, including cold start and reconfiguration
 - Synthetic scalability benchmark over larger sensor and gateway configurations
+- Boundary-month sensitivity analysis excluding the two incomplete calendar months
+- Fairness-weight sensitivity under heterogeneous per-sensor traffic
+- Diagnostic analysis of shared worst-sensor ties in the fairness-aware greedy
 
 **Outputs**
 
@@ -55,6 +58,7 @@ scripts/                 command-line entry points and bundle exporter
 tests/                   unit, regression and pipeline tests
 paper_results/           manuscript-facing outputs
 ├── scalability/         synthetic scalability benchmark outputs
+└── revision_1/          peer-review sensitivity outputs
 ```
 
 ## Dataset
@@ -122,6 +126,61 @@ python .\scripts\run_scalability_experiment.py --data-root "<DATA_ROOT>" --out-d
 
 The default benchmark uses five seeds, 500 observed packets per synthetic sensor, `|S| = {10, 50, 100, 200, 500}` at three gateways, and `|G| = {3, 5, 10, 20}` at 50 sensors. Exact DP is skipped above 10 gateways because its sensor-local enumeration grows as `2^|G|`. The greedy method is still evaluated there. The synthetic model preserves the marginal per-link coverage distribution, not the full empirical cross-gateway dependence structure.
 
+## Peer-review sensitivity experiments
+
+The revised manuscript includes three additional analyses introduced during peer review.
+
+### Boundary-month sensitivity
+
+This analysis repeats the robust all-month optimisation after excluding the incomplete February 2024 and June 2025 records.
+
+```bash
+python scripts/run_revision_experiments.py \
+  --data-root <data-root> \
+  --out-dir ./revision_outputs
+```
+
+PowerShell:
+
+```powershell
+python .\scripts\run_revision_experiments.py --data-root "<DATA_ROOT>" --out-dir ".\revision_outputs"
+```
+
+### Heterogeneous per-sensor traffic
+
+This experiment evaluates the fairness weight under balanced and heterogeneous traffic for 10, 50, and 100 sensors.
+
+```bash
+python scripts/run_revision_heterogeneity.py \
+  --data-root <data-root> \
+  --out-dir ./revision_outputs
+```
+
+PowerShell:
+
+```powershell
+python .\scripts\run_revision_heterogeneity.py --data-root "<DATA_ROOT>" --out-dir ".\revision_outputs"
+```
+
+The default revision experiment uses five seeds, 500 observed packets per synthetic sensor, three gateways, the three reference requirements, and `lambda = {0, 0.01, 0.02, 0.1, 1.0}`.
+
+### Shared worst-sensor tie diagnostic
+
+This diagnostic illustrates the behaviour of the fairness term when several sensors share the current minimum coverage.
+
+```bash
+python scripts/run_revision_fairness_diagnostic.py \
+  --out-dir ./revision_outputs
+```
+
+PowerShell:
+
+```powershell
+python .\scripts\run_revision_fairness_diagnostic.py --out-dir ".\revision_outputs"
+```
+
+Checked manuscript-facing copies of these outputs are stored in `paper_results/revision_1/`.
+
 ## Export the manuscript-facing bundle
 
 After the pipeline finishes:
@@ -144,21 +203,24 @@ supplementary/Table_S2_oracle_budget_and_subset_similarity.csv
 
 | Manuscript content | Main generated source |
 |---|---|
-| Figure 1: aggregate and worst-sensor coverage versus link budget | `18_method_comparison.csv`, `coverage_vs_k.pdf` |
+| Figure 2: aggregate and worst-sensor coverage versus link budget | `18_method_comparison.csv`, `coverage_vs_k.pdf` |
 | Reference requirement table | `26_stronger_baseline_threshold_comparison.csv` |
 | Exact-DP runtime | `19b_exact_dp_runtime.csv` |
 | 1,000-pair optimality evaluation | `27b_grid_summary_per_method.csv` |
 | Proposed versus multi-cover subset identity | `27c_proposed_vs_multicover_summary.csv`, `27d_proposed_vs_multicover_divergences.csv` |
 | Exact-optimum multiplicity | `28_optimum_multiplicity_main.csv` |
-| Figure 2: fairness-weight sensitivity | `22b_lambda_threshold_summary_at_ref_k.csv`, `22c_lambda_subset_identity.csv`, `25_sensor_gap_by_lambda.csv`, `lambda_vs_worst_coverage.pdf` |
+| Figure 3: fairness-weight sensitivity | `22b_lambda_threshold_summary_at_ref_k.csv`, `22c_lambda_subset_identity.csv`, `25_sensor_gap_by_lambda.csv`, `lambda_vs_worst_coverage.pdf` |
 | Temporal quality of different equal-cardinality subsets | `29_equal_cardinality_subset_temporal_quality.csv`, `29b_proposed_vs_multicover_temporal_quality_summary.csv` |
 | Retrospective monthly reoptimisation | `23_retrospective_monthly_reoptimization.csv`, `23b_retrospective_monthly_reoptimization_summary.csv` |
 | Whole-period, monthly, and robust all-month budgets | `24_temporal_requirement_table.csv` |
 | Prospective policies, reconfiguration, and cold start | `30_rolling_temporal_per_month.csv`, `30b_rolling_temporal_summary.csv` |
 | Synthetic scalability evaluation | `scalability/32b_scalability_summary.csv`, `scalability/32d_scalability_metadata.json` |
+| Boundary-month sensitivity of the robust all-month solution | `revision_1/33_boundary_month_sensitivity.csv` |
+| Heterogeneous-traffic fairness-weight sensitivity | `revision_1/34_heterogeneous_traffic_lambda_raw.csv`, `revision_1/34b_heterogeneous_traffic_lambda_summary.csv`, `revision_1/34c_heterogeneous_traffic_metadata.json` |
+| Shared worst-sensor tie diagnostic | `revision_1/35_fairness_worst_tie_diagnostic.csv` |
 | Supplementary Tables S1 and S2 | generated by `scripts/export_publication_bundle.py` |
 
-Manuscript-facing outputs are stored in [`paper_results/`](paper_results/README.md). Outputs from the synthetic scalability experiment are stored in `paper_results/scalability/`.
+Manuscript-facing outputs are stored in [`paper_results/`](paper_results/README.md). Outputs from the synthetic scalability experiment are stored in `paper_results/scalability/`, while the additional peer-review sensitivity outputs are stored in `paper_results/revision_1/`.
 
 The algorithm box is typeset directly in the manuscript source rather than exported by the analysis pipeline. `temporal_summary.pdf` is an additional diagnostic figure and is not required by the main manuscript.
 
@@ -178,7 +240,7 @@ The algorithm box is typeset directly in the manuscript source rather than expor
 python -m pytest
 ```
 
-The test suite contains 32 tests covering solver checks, deterministic tie cases, temporal cold start, robust-static and rolling policies, scalability checks, publication regressions, and supplementary-table export.
+The test suite covers solver checks, deterministic tie cases, temporal cold start, robust-static and rolling policies, scalability checks, peer-review sensitivity analyses, publication regressions, and supplementary-table export.
 
 ## License and citation
 

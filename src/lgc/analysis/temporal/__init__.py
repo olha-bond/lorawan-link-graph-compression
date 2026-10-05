@@ -13,6 +13,7 @@ from .retrospective import (
     summarize_retrospective_monthly,
 )
 from .robust import build_temporal_requirement_table, solve_exact_all_month_static
+from .sensitivity import run_boundary_month_sensitivity, subset_temporal_context
 from .rolling import run_rolling_prospective, summarize_rolling
 
 __all__ = [
@@ -26,10 +27,12 @@ __all__ = [
     "evaluate_subset_on_month",
     "fit_from_combined_window",
     "fit_on_window",
+    "run_boundary_month_sensitivity",
     "run_retrospective_monthly",
     "run_rolling_prospective",
     "solve_exact_all_month_static",
     "subset_hash",
+    "subset_temporal_context",
     "summarize_retrospective_monthly",
     "summarize_rolling",
 ]
