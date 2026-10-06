@@ -3,14 +3,20 @@ import pandas as pd
 from lgc.analysis.temporal import (
     build_temporal_context,
     run_boundary_month_sensitivity,
+    run_frozen_window_sensitivity,
     subset_temporal_context,
 )
 from lgc.model import LinkGraph
 
 
-def _sample_graph() -> LinkGraph:
+def _sample_graph(n_months: int = 4) -> LinkGraph:
     rows = []
-    months = pd.date_range("2024-01-01", periods=4, freq="MS", tz="UTC")
+    months = pd.date_range(
+        "2024-01-01",
+        periods=n_months,
+        freq="MS",
+        tz="UTC",
+    )
     for month_index, month in enumerate(months):
         month_name = month.strftime("%Y-%m")
         for sensor_index in range(1, 3):
@@ -69,3 +75,27 @@ def test_boundary_month_sensitivity_keeps_robust_budget_on_sample():
     assert row["delta_links"] == 0
     assert row["same_selected_subset"]
     assert row["subset_jaccard"] == 1.0
+
+
+def test_frozen_window_sensitivity_uses_equal_length_windows():
+    graph = _sample_graph(n_months=6)
+    context = build_temporal_context(graph)
+
+    summary, per_month = run_frozen_window_sensitivity(
+        graph,
+        context,
+        [(90, 80)],
+        frozen_initial_months=3,
+    )
+
+    assert len(summary) == 1
+    row = summary.iloc[0]
+    assert row["baseline_fit_months"] == "2024-01;2024-02;2024-03"
+    assert row["complete_fit_months"] == "2024-02;2024-03;2024-04"
+    assert row["excluded_incomplete_month"] == "2024-01"
+    assert row["baseline_test_months_n"] == 3
+    assert row["common_test_months_n"] == 2
+    assert row["common_test_start"] == "2024-05"
+    assert row["common_test_end"] == "2024-06"
+    assert len(per_month) == 2
+    assert per_month["test_month"].tolist() == ["2024-05", "2024-06"]

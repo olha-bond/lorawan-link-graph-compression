@@ -1,7 +1,5 @@
 {
-  "traffic_model": "Balanced scenarios assign the same observed-packet count to every sensor. Heterogeneous scenarios preserve the same total observed-packet count but allocate it across sensors according to the empirical UVA per-sensor traffic multipliers. The empirical multiplier profile is repeated and shuffled for larger synthetic deployments.",
-  "paired_topology_note": "For a fixed seed and sensor index, balanced and heterogeneous scenarios use the same sampled target link-coverage profile; only the per-sensor packet count changes.",
-  "packets_per_sensor_reference": 500,
+  "packets_per_sensor": 500,
   "seeds": 5,
   "sensor_grid": [
     10,
@@ -16,7 +14,7 @@
     0.1,
     1.0
   ],
-  "reference_requirements": [
+  "requirements": [
     [
       90,
       80
@@ -29,57 +27,5 @@
       98,
       90
     ]
-  ],
-  "empirical_sensor_traffic_profile": [
-    {
-      "sensor": "sensor01",
-      "observed_packets": 132576,
-      "traffic_multiplier": 1.0753942406512584
-    },
-    {
-      "sensor": "sensor02",
-      "observed_packets": 159367,
-      "traffic_multiplier": 1.292710248837415
-    },
-    {
-      "sensor": "sensor03",
-      "observed_packets": 131967,
-      "traffic_multiplier": 1.070454318700403
-    },
-    {
-      "sensor": "sensor04",
-      "observed_packets": 134703,
-      "traffic_multiplier": 1.0926474655929164
-    },
-    {
-      "sensor": "sensor05",
-      "observed_packets": 137269,
-      "traffic_multiplier": 1.1134616523349445
-    },
-    {
-      "sensor": "sensor06",
-      "observed_packets": 136942,
-      "traffic_multiplier": 1.110809181927835
-    },
-    {
-      "sensor": "sensor07",
-      "observed_packets": 136963,
-      "traffic_multiplier": 1.1109795240640714
-    },
-    {
-      "sensor": "sensor08",
-      "observed_packets": 129798,
-      "traffic_multiplier": 1.0528604094862724
-    },
-    {
-      "sensor": "sensor09",
-      "observed_packets": 127714,
-      "traffic_multiplier": 1.0359559803473843
-    },
-    {
-      "sensor": "sensor10",
-      "observed_packets": 5514,
-      "traffic_multiplier": 0.044726978057499395
-    }
   ]
 }

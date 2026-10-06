@@ -34,10 +34,14 @@ The `revision_1/` subdirectory contains additional analyses introduced during pe
 - `33_boundary_month_sensitivity.csv` — robust all-month sensitivity after excluding the incomplete February 2024 and June 2025 records
 - `34_heterogeneous_traffic_lambda_raw.csv` — per-run fairness-weight results under balanced and heterogeneous per-sensor traffic
 - `34b_heterogeneous_traffic_lambda_summary.csv` — aggregated heterogeneous-traffic results reported in the revised manuscript
-- `34c_heterogeneous_traffic_metadata.json` — experiment settings and the empirical per-sensor traffic profile
+- `34c_heterogeneous_traffic_metadata.json` — experiment settings
+- `34d_heterogeneous_multicover_raw.csv` — per-case comparison of the reusable ordering at `lambda = 1.0`, multi-cover greedy, and the exact reference under heterogeneous traffic
+- `34e_heterogeneous_multicover_summary.csv` — aggregated multi-cover comparison across the 10-, 50-, and 100-sensor heterogeneous cases
 - `35_fairness_worst_tie_diagnostic.csv` — diagnostic of the shared-minimum behaviour of the fairness-aware greedy
+- `36_frozen_initial_window_sensitivity.csv` — summary of the frozen-policy sensitivity to the initial three-month fitting window
+- `36b_frozen_initial_window_sensitivity_per_month.csv` — per-month results for the two frozen initial-window fits
 
-The boundary-month experiment is regenerated with `scripts/run_revision_experiments.py`. The heterogeneous-traffic experiment is regenerated with `scripts/run_revision_heterogeneity.py`, and the tie diagnostic with `scripts/run_revision_fairness_diagnostic.py`.
+The boundary-month experiment is regenerated with `scripts/run_revision_experiments.py`. The heterogeneous-traffic experiment and multi-cover comparison are regenerated with `scripts/run_revision_heterogeneity.py`, the tie diagnostic with `scripts/run_revision_fairness_diagnostic.py`, and the frozen-window sensitivity with `scripts/run_revision_frozen_sensitivity.py`.
 
 ## Provenance
 
@@ -45,6 +49,6 @@ The spatial and temporal files can be regenerated from the public UVA dataset by
 
 The scalability files are regenerated separately with `scripts/run_scalability_experiment.py`.
 
-The peer-review sensitivity outputs in `revision_1/` are regenerated with `scripts/run_revision_experiments.py`, `scripts/run_revision_heterogeneity.py`, and `scripts/run_revision_fairness_diagnostic.py`.
+The peer-review sensitivity outputs in `revision_1/` are regenerated with `scripts/run_revision_experiments.py`, `scripts/run_revision_heterogeneity.py`, `scripts/run_revision_fairness_diagnostic.py`, and `scripts/run_revision_frozen_sensitivity.py`.
 
 The dataset manifest in `00_dataset_manifest.json` records the input validation and deployment dimensions used by the main pipeline.

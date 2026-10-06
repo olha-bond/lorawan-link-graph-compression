@@ -1,0 +1,4 @@
+﻿n_sensors,n_gateways,cases,proposed_gap_mean_links,proposed_gap_max_links,proposed_optimum_match_rate,multicover_gap_mean_links,multicover_gap_max_links,multicover_optimum_match_rate
+10,3,15,0.06666666666666667,1.0,0.9333333333333333,0.0,0.0,1.0
+50,3,15,25.4,37.0,0.0,0.0,0.0,1.0
+100,3,15,48.8,72.0,0.0,0.0,0.0,1.0
