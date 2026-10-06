@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it using the metadata in this file."
 type: software
 title: "Threshold-Aware Link-Graph Compression with Per-Sensor Coverage Guarantees and Temporal Robustness in Urban LoRaWAN Networks"
-version: 0.3.1
+version: 0.4.0
 license: MIT
 repository-code: "https://github.com/olha-bond/lorawan-link-graph-compression"
 authors:
